@@ -7,7 +7,7 @@ go:
 install:
   - go get github.com/Masterminds/glide
   - glide install
-  - go install github.com/ory-am/hydra
+  - go install github.com/worktimeassistant/gin-limit
 
 script:
   - go test -race $(glide nv)
