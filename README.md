@@ -3,26 +3,12 @@ Simple rate limiting middleware for Gin.
 You can set rates per endpoint or on the global router.
 
 # Install
+```bash
 go get -u github.com/WorkTimeAssistant/gin-limit
-
-# Usage
-## Limit global router
-```go
-package main
-
-import (
-	gl github.com/WorkTimeAssistant/gin-limit
-	"github.com/gin-gonic/gin"
-)
-
-func main() {
-	router := gin.Default()
-	router.Use(gl.Limit(1000 /* max requests per second */, 10 /* max burst size*/))
-	router.Run()
-}
 ```
 
-## Limit endpoint
+# Usage
+Limit global or endpoint's router.
 ```go
 package main
 
@@ -33,7 +19,8 @@ import (
 
 func main() {
 	router := gin.Default()
-	v1.GET("/test", gl.Limit(1000 /* max requests per second */, 10 /* max burst size*/), /* handler */)
+	router.Use(gl.Limit(1000 /* max requests per second */, 20 /* max burst size*/))
+	router.GET("/test", gl.Limit(100, 10), /* handler */)
 	router.Run()
 }
 ```
